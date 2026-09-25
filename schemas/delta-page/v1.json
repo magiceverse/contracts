@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://contracts.magiceverse.dev/delta-page/v1",
+    "version": "1.0.0",
+    "title": "DeltaPage",
+    "description": "One page of the product delta feed. Products are sorted by (updated_at, uid) and tombstones appear inline.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["schema", "data", "cursor", "generated_at"],
+    "properties": {
+        "schema": {
+            "description": "Contract version of the items in data.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["product"],
+            "properties": {
+                "product": { "$ref": "#/$defs/semver" }
+            }
+        },
+        "data": {
+            "type": "array",
+            "items": { "$ref": "https://contracts.magiceverse.dev/product/v1" }
+        },
+        "cursor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["next", "has_more"],
+            "properties": {
+                "next": {
+                    "description": "Opaque; send back as ?cursor= to get the next page. Null only when nothing has been seen yet.",
+                    "type": ["string", "null"],
+                    "minLength": 1
+                },
+                "has_more": { "type": "boolean" }
+            },
+            "if": {
+                "properties": { "has_more": { "const": true } }
+            },
+            "then": {
+                "properties": { "next": { "type": "string" } }
+            }
+        },
+        "generated_at": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" }
+    },
+    "$defs": {
+        "semver": {
+            "type": "string",
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        }
+    }
+}

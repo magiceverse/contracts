@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://contracts.magiceverse.dev/technique/v1",
+    "version": "1.0.0",
+    "title": "Technique",
+    "description": "A decoration technique (screen print, engraving, ...). The ERP prices it per unit.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["code", "name"],
+    "properties": {
+        "code": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+        "name": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/localized-text" },
+        "max_colors": {
+            "description": "Maximum number of colours; null means full colour.",
+            "type": ["integer", "null"],
+            "minimum": 1
+        },
+        "unit": {
+            "description": "What is counted for pricing.",
+            "enum": ["color", "position", "piece", "cm2"]
+        },
+        "lead_days": {
+            "description": "Extra production days the technique adds; null when unknown.",
+            "type": ["integer", "null"],
+            "minimum": 0
+        },
+        "description": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/localized-text" }
+    }
+}
