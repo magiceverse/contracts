@@ -1,0 +1,2 @@
+pointer: /values/common/weight
+reason: a measurement is closed: only value and unit are allowed.

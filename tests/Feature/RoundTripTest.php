@@ -7,6 +7,7 @@ use Magiceverse\Contracts\Product\ProductData;
 use Magiceverse\Contracts\Product\ProductType;
 use Magiceverse\Contracts\Schema;
 use Magiceverse\Contracts\Technique\TechniqueData;
+use Spatie\LaravelData\Optional;
 
 const DATA_CLASSES = [
     'technique'      => TechniqueData::class,
@@ -75,6 +76,28 @@ it('prunes empty maps in nested products too', function () {
 
     Schema::validate('delta-page', 1, $output);
     expect($output['data'][1])->not->toHaveKey('values');
+});
+
+it('carries measurement values through unchanged', function () {
+    $product = ProductData::from(readFixture(dirname(__DIR__, 2).'/fixtures/product/v1/simple-with-measurement.json'));
+
+    $output = $product->toArray();
+
+    Schema::validate('product', 1, $output);
+    expect($output['values']['common']['weight'])->toBe(['value' => '0.18', 'unit' => 'KILOGRAM'])
+        ->and($output['values']['common']['print_area_width'])->toBe(['value' => 250, 'unit' => 'MILLIMETER']);
+});
+
+it('keeps the locale and channel scope of media', function () {
+    $product = ProductData::from(readFixture(dirname(__DIR__, 2).'/fixtures/product/v1/media-with-locale-and-channel.json'));
+
+    expect($product->media[0]->locale)->toBeNull()
+        ->and($product->media[0]->channel)->toBeNull()
+        ->and($product->media[1]->locale)->toBe('nl_NL')
+        ->and($product->media[1]->channel)->toBeInstanceOf(Optional::class)
+        ->and($product->media[3]->locale)->toBe('en_US')
+        ->and($product->media[3]->channel)->toBe('webshop')
+        ->and($product->toArray()['media'][1])->not->toHaveKey('channel');
 });
 
 it('types enums and nested data', function () {

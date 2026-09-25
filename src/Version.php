@@ -16,7 +16,7 @@ final class Version
 
     public const PRINT_POSITION = '1.0.0';
 
-    public const PRODUCT = '1.0.0';
+    public const PRODUCT = '1.1.0';
 
     public const DELTA_PAGE = '1.0.0';
 

@@ -1,0 +1,30 @@
+{
+    "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2W1",
+    "sku": "TEE-ORGANIC-GREEN-S",
+    "type": "simple",
+    "parent_uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+    "status": "enabled",
+    "family": "apparel",
+    "categories": [
+        "t_shirts"
+    ],
+    "channels": [
+        "default"
+    ],
+    "values": {
+        "common": {
+            "sku": "TEE-ORGANIC-GREEN-S",
+            "color": "green",
+            "size": "s",
+            "weight": {
+                "value": "0.18",
+                "unit": "KILOGRAM"
+            },
+            "print_area_width": {
+                "value": 250,
+                "unit": "MILLIMETER"
+            }
+        }
+    },
+    "updated_at": "2026-09-24T16:45:12Z"
+}

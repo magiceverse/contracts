@@ -4,6 +4,17 @@ All notable changes to this package are documented here. The package follows
 [Semantic Versioning](https://semver.org/); each schema also carries its own
 version (see `Version`).
 
+## [0.1.1] - Unreleased
+
+### Added
+- Product 1.1.0: attribute values may be a UnoPim measurement,
+  `{"value": "0.35", "unit": "KILOGRAM"}` (value a decimal string or number,
+  closed object). An object with a `value` key is checked as a measurement,
+  any other object as a price.
+- Product 1.1.0: media items take optional, nullable `locale` and `channel`, so
+  images of locale- or channel-specific attributes keep their scope. `MediaData`
+  has both properties.
+
 ## [0.1.0] - Unreleased
 
 ### Added

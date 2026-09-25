@@ -1,0 +1,2 @@
+pointer: /media/0/locale
+reason: media locale must be a locale code like nl_NL, or null.
