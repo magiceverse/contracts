@@ -1,0 +1,2 @@
+pointer: /source
+reason: source is the tenant origin only: https://<tenant host> without a path.

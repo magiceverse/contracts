@@ -1,0 +1,15 @@
+{
+    "code": "screen_print",
+    "name": {
+        "nl_NL": "Zeefdruk",
+        "en_US": "Screen print"
+    },
+    "max_colors": 4,
+    "unit": "color",
+    "lead_days": 5,
+    "description": {
+        "nl_NL": "Per kleur een zeef; scherp en voordelig vanaf 50 stuks.",
+        "en_US": "One screen per colour; sharp and economical from 50 pieces."
+    },
+    "price": 1.25
+}

@@ -1,0 +1,2 @@
+pointer: /variants
+reason: only configurable products have variants.

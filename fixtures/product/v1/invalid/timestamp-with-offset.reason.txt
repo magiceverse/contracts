@@ -1,0 +1,2 @@
+pointer: /updated_at
+reason: timestamps must be UTC with a Z suffix.

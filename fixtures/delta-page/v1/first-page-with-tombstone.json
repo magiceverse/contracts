@@ -1,0 +1,103 @@
+{
+    "schema": {
+        "product": "1.0.0"
+    },
+    "data": [
+        {
+            "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2V1",
+            "sku": "TEE-ORGANIC-RED-M",
+            "type": "simple",
+            "parent_uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+            "status": "enabled",
+            "family": "apparel",
+            "categories": [
+                "t_shirts"
+            ],
+            "channels": [
+                "default"
+            ],
+            "values": {
+                "common": {
+                    "sku": "TEE-ORGANIC-RED-M",
+                    "color": "red",
+                    "size": "m"
+                }
+            },
+            "updated_at": "2026-09-24T16:45:12Z"
+        },
+        {
+            "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+            "sku": "TEE-ORGANIC",
+            "type": "configurable",
+            "parent_uid": null,
+            "status": "enabled",
+            "family": "apparel",
+            "categories": [
+                "t_shirts"
+            ],
+            "channels": [
+                "default"
+            ],
+            "values": {
+                "common": {
+                    "sku": "TEE-ORGANIC",
+                    "material": "organic_cotton"
+                },
+                "locale_specific": {
+                    "nl_NL": {
+                        "name": "Biologisch T-shirt"
+                    }
+                }
+            },
+            "media": [
+                {
+                    "attribute": "image",
+                    "url": "https://cdn.example.com/p/tee-organic.jpg",
+                    "filename": "tee-organic.jpg",
+                    "mime": "image/jpeg",
+                    "position": 0
+                }
+            ],
+            "variants": [
+                "01J8Z3K4M5N6P7Q8R9S0T1V2V1",
+                "01J8Z3K4M5N6P7Q8R9S0T1V2V2"
+            ],
+            "super_attributes": [
+                "color",
+                "size"
+            ],
+            "print_positions": [
+                {
+                    "code": "chest",
+                    "name": {
+                        "nl_NL": "Borst"
+                    },
+                    "max_width_mm": 100,
+                    "max_height_mm": 100,
+                    "techniques": [
+                        "screen_print"
+                    ]
+                }
+            ],
+            "techniques": [
+                "screen_print"
+            ],
+            "master": null,
+            "created_at": "2026-07-01T10:00:00Z",
+            "updated_at": "2026-09-24T16:45:12Z"
+        },
+        {
+            "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2D1",
+            "sku": "PEN-OLD-BLUE",
+            "type": "simple",
+            "status": "disabled",
+            "updated_at": "2026-09-25T06:59:58Z",
+            "deleted_at": "2026-09-25T06:59:58Z"
+        }
+    ],
+    "cursor": {
+        "next": "MjAyNi0wOS0yNVQwNjo1OTo1OFp8MTIz",
+        "has_more": true
+    },
+    "generated_at": "2026-09-25T07:00:05Z"
+}

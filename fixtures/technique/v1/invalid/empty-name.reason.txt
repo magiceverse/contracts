@@ -1,0 +1,2 @@
+pointer: /name
+reason: name must have at least one locale.

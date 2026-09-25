@@ -1,0 +1,2 @@
+pointer: /values/common/dimensions
+reason: an attribute value is a string, number, boolean, null or list of strings; not an object.

@@ -1,0 +1,16 @@
+{
+    "code": "front",
+    "name": {
+        "nl_NL": "Voorkant",
+        "en_US": "Front"
+    },
+    "max_width_mm": 0,
+    "max_height_mm": 40,
+    "shape": "rectangle",
+    "techniques": [
+        "screen_print",
+        "digital_transfer"
+    ],
+    "image_url": "https://cdn.example.com/positions/front.png",
+    "model_area": null
+}

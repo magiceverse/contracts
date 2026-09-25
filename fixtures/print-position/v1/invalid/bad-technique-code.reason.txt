@@ -1,0 +1,2 @@
+pointer: /techniques/1
+reason: technique codes must be lowercase snake.
