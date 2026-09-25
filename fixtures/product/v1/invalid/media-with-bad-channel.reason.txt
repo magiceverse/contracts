@@ -1,0 +1,2 @@
+pointer: /media/0/channel
+reason: media channel must be a lowercase snake channel code, or null.

@@ -1,0 +1,32 @@
+{
+    "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2W2",
+    "sku": "TEE-ORGANIC-RED-L",
+    "type": "simple",
+    "parent_uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+    "status": "enabled",
+    "family": "apparel",
+    "categories": [
+        "t_shirts"
+    ],
+    "channels": [
+        "default"
+    ],
+    "values": {
+        "common": {
+            "sku": "TEE-ORGANIC-RED-M",
+            "color": "red",
+            "size": "m"
+        }
+    },
+    "updated_at": "2026-09-24T16:45:12Z",
+    "media": [
+        {
+            "attribute": "banner",
+            "url": "https://cdn.example.com/p/tee-webshop-banner.jpg",
+            "filename": "tee-webshop-banner.jpg",
+            "mime": "image/jpeg",
+            "position": 0,
+            "channel": "Web Shop"
+        }
+    ]
+}

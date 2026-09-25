@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/product/v1",
-    "x-version": "1.0.0",
+    "x-version": "1.1.0",
     "title": "Product",
     "description": "A product as the owning PIM publishes it. A non-null deleted_at makes it a tombstone that carries only its identity.",
     "type": "object",
@@ -161,11 +161,17 @@
     ],
     "$defs": {
         "attribute-value": {
-            "description": "Scalar, null, a list of option codes for multiselects, or a price.",
+            "description": "Scalar, null, a list of option codes for multiselects, a price, or a measurement (since 1.1.0).",
             "anyOf": [
                 { "type": ["string", "number", "boolean", "null"] },
                 { "type": "array", "items": { "type": "string" } },
-                { "$ref": "#/$defs/price" }
+                {
+                    "description": "Objects: a measurement has a value key, which can never be a currency code; anything else is a price. Choosing one keeps errors about the shape that was meant.",
+                    "type": "object",
+                    "if": { "type": "object", "properties": { "value": true }, "required": ["value"] },
+                    "then": { "$ref": "#/$defs/measurement" },
+                    "else": { "$ref": "#/$defs/price" }
+                }
             ]
         },
         "price": {
@@ -174,6 +180,20 @@
             "minProperties": 1,
             "propertyNames": { "pattern": "^[A-Z]{3}$" },
             "additionalProperties": { "type": "string", "pattern": "^-?[0-9]+(\\.[0-9]+)?$" }
+        },
+        "measurement": {
+            "description": "Measurement attribute as UnoPim stores it, e.g. {\"value\": \"0.35\", \"unit\": \"KILOGRAM\"}. Since 1.1.0.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "unit"],
+            "properties": {
+                "value": {
+                    "description": "Decimal string or number.",
+                    "type": ["string", "number"],
+                    "pattern": "^-?[0-9]+(\\.[0-9]+)?$"
+                },
+                "unit": { "type": "string", "minLength": 1 }
+            }
         },
         "attribute-values": {
             "type": "object",
@@ -192,6 +212,20 @@
                 "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
                 "filename": { "type": "string", "minLength": 1 },
                 "mime": { "type": ["string", "null"] },
+                "locale": {
+                    "description": "Locale the file belongs to, for a locale-specific attribute; null or absent when it applies to all. Since 1.1.0.",
+                    "anyOf": [
+                        { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/locale" },
+                        { "type": "null" }
+                    ]
+                },
+                "channel": {
+                    "description": "Channel the file belongs to, for a channel-specific attribute; null or absent when it applies to all. Since 1.1.0.",
+                    "anyOf": [
+                        { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+                        { "type": "null" }
+                    ]
+                },
                 "position": {
                     "description": "Order within the attribute, starting at 0.",
                     "type": "integer",

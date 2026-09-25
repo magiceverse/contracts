@@ -1,0 +1,2 @@
+pointer: /values/common/weight
+reason: a measurement needs both value and unit.
