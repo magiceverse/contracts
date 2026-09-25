@@ -14,3 +14,6 @@ version (see `Version`).
 - `Schema` for offline validation with every error reported by JSON pointer
   (`ContractViolation`), and `Version` as the single source of contract versions.
 - Cross-system fixtures, valid and invalid, for every entity.
+- Price attribute values (`{"EUR": "12.00"}`), CloudEvents `dataschema` and
+  `traceparent` attributes.
+- DTOs leave empty maps out of `toArray()` so they never encode as `[]`.
