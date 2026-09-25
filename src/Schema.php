@@ -31,6 +31,12 @@ final class Schema
 
     public static function path(string $entity, int $major): string
     {
+        // The entity becomes part of a file path; refuse anything that could
+        // leave the schemas directory.
+        if (! preg_match('/^[a-z-]+$/', $entity)) {
+            throw new InvalidArgumentException("Invalid contract entity [{$entity}].");
+        }
+
         $path = self::directory()."/{$entity}/v{$major}.json";
 
         if (! is_file($path)) {
@@ -93,11 +99,18 @@ final class Schema
         $id = self::id($entity, $major);
         $result = (self::$shared ??= self::validator())->validate($json, $id);
 
-        if ($result->isValid()) {
-            return;
+        $errors = $result->isValid() ? [] : self::errors($result->error(), new ErrorFormatter);
+
+        // A rule JSON Schema cannot express: the event's subject names the
+        // product it carries.
+        if ($entity === 'cloudevent' && is_string($json->subject ?? null) && is_string($json->data->uid ?? null)
+            && $json->subject !== $json->data->uid) {
+            $errors['/subject'][] = 'The subject must equal data.uid';
         }
 
-        throw new ContractViolation($id, self::errors($result->error(), new ErrorFormatter));
+        if ($errors !== []) {
+            throw new ContractViolation($id, $errors);
+        }
     }
 
     /**
@@ -105,15 +118,27 @@ final class Schema
      * their own schema as "not evaluated", so one bad value also triggers an
      * additionalProperties error on its parent naming every declared
      * property. Those echoes are dropped; only undeclared names are reported.
+     * Likewise, when a nullable field (anyOf [X, null]) fails, the "must be
+     * null" branch is dropped when the X branch explains what is wrong.
      *
      * @return array<string, list<string>>
      */
     private static function errors(ValidationError $error, ErrorFormatter $formatter): array
     {
-        if ($error->subErrors()) {
+        $subErrors = $error->subErrors();
+
+        if ($error->keyword() === 'anyOf') {
+            $explained = array_filter($subErrors, fn (ValidationError $sub) => ! self::isNullBranch($sub));
+
+            if ($explained !== []) {
+                $subErrors = $explained;
+            }
+        }
+
+        if ($subErrors) {
             return array_merge_recursive(...array_map(
                 fn (ValidationError $sub) => self::errors($sub, $formatter),
-                $error->subErrors(),
+                array_values($subErrors),
             ));
         }
 
@@ -131,5 +156,10 @@ final class Schema
         }
 
         return [$formatter->formatErrorKey($error) => [$message]];
+    }
+
+    private static function isNullBranch(ValidationError $error): bool
+    {
+        return $error->keyword() === 'type' && ($error->args()['expected'] ?? null) === 'null';
     }
 }

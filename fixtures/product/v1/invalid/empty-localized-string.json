@@ -1,0 +1,56 @@
+{
+    "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+    "sku": "TEE-ORGANIC",
+    "type": "configurable",
+    "parent_uid": null,
+    "status": "enabled",
+    "family": "apparel",
+    "categories": [
+        "t_shirts"
+    ],
+    "channels": [
+        "default"
+    ],
+    "values": {
+        "common": {
+            "sku": "TEE-ORGANIC",
+            "material": "organic_cotton"
+        },
+        "locale_specific": {
+            "nl_NL": {
+                "name": "Biologisch T-shirt"
+            }
+        }
+    },
+    "media": [
+        {
+            "attribute": "image",
+            "url": "https://cdn.example.com/p/tee-organic.jpg",
+            "filename": "tee-organic.jpg",
+            "mime": "image/jpeg",
+            "position": 0
+        }
+    ],
+    "variants": [
+        "01J8Z3K4M5N6P7Q8R9S0T1V2V1",
+        "01J8Z3K4M5N6P7Q8R9S0T1V2V2"
+    ],
+    "super_attributes": [
+        "color",
+        "size"
+    ],
+    "print_positions": [
+        {
+            "code": "chest",
+            "name": {
+                "nl_NL": ""
+            }
+        }
+    ],
+    "techniques": [
+        "screen_print"
+    ],
+    "master": null,
+    "created_at": "2026-07-01T10:00:00Z",
+    "updated_at": "2026-09-24T16:45:12Z"
+}

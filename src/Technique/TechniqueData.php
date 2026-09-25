@@ -2,6 +2,7 @@
 
 namespace Magiceverse\Contracts\Technique;
 
+use Magiceverse\Contracts\Common\OmitsEmptyMaps;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
@@ -14,6 +15,11 @@ use Spatie\LaravelData\Optional;
 #[MapName(SnakeCaseMapper::class)]
 class TechniqueData extends Data
 {
+    use OmitsEmptyMaps;
+
+    /** name is required and must not be empty, so only description is pruned. */
+    protected const MAPS = ['description' => 1];
+
     /**
      * @param  array<string, string>  $name  text per locale
      * @param  array<string, string>|Optional  $description  text per locale

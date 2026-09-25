@@ -1,10 +1,10 @@
 {
     "specversion": "1.0",
     "type": "dev.magiceverse.product.updated",
-    "source": "https://spranz.magiceverse.dev/api/v1",
+    "source": "https://spranz.magiceverse.dev",
     "id": "01J8Z3K4M5N6P7Q8R9S0T1V2E1",
     "time": "2026-09-25T07:00:00Z",
-    "subject": "01J8Z3K4M5N6P7Q8R9S0T1V2A1",
+    "subject": "01J8Z3K4M5N6P7Q8R9S0T1V2A2",
     "datacontenttype": "application/json",
     "data": {
         "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2A1",

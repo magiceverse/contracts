@@ -1,0 +1,2 @@
+pointer: /values/common/price
+reason: price keys must be uppercase ISO 4217 currency codes (^[A-Z]{3}$); eur is not.

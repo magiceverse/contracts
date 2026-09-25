@@ -23,6 +23,8 @@ class CloudEventData extends Data
         public string $datacontenttype,
         public ProductData $data,
         public string $tenant,
+        public string|Optional $dataschema,
+        public string|Optional $traceparent,
         public string|Optional $correlationid,
     ) {}
 }

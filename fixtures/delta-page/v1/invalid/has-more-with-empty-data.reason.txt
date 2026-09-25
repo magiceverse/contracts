@@ -1,0 +1,2 @@
+pointer: /data
+reason: the server never sends an empty page with has_more true.

@@ -24,10 +24,10 @@ it('declares the $id that matches its file location', function (string $id, stri
         ->and($schema['$schema'])->toBe('https://json-schema.org/draft/2020-12/schema');
 })->with(fn () => array_map(fn ($id, $path) => [$id, $path], array_keys(Schema::all()), Schema::all()));
 
-it('keeps Version in step with the version keyword of each schema', function (string $entity, string $version) {
+it('keeps Version in step with the x-version keyword of each schema', function (string $entity, string $version) {
     $schema = json_decode(file_get_contents(Schema::path($entity, 1)), true, flags: JSON_THROW_ON_ERROR);
 
-    expect($schema['version'])->toBe($version)
+    expect($schema['x-version'])->toBe($version)
         ->and(Version::of($entity))->toBe($version);
 })->with(fn () => array_map(fn ($entity, $version) => [$entity, $version], array_keys(Version::ALL), Version::ALL));
 
@@ -103,6 +103,33 @@ it('points at the local schema file', function () {
 it('refuses a schema it does not ship', function () {
     Schema::path('product', 2);
 })->throws(InvalidArgumentException::class, 'No schema for [product] v2.');
+
+it('refuses an entity name that is not a plain slug', function (string $entity) {
+    Schema::validate($entity, 1, []);
+})->with(['../product', 'product/v1', 'Product', ''])->throws(InvalidArgumentException::class, 'Invalid contract entity');
+
+it('reports a failing nullable field once, without the null branch', function () {
+    try {
+        Schema::validate('product', 1, [
+            'uid'        => '01J8Z3K4M5N6P7Q8R9S0T1V2A1',
+            'sku'        => 'X',
+            'type'       => 'simple',
+            'status'     => 'enabled',
+            'updated_at' => '2026-09-25T07:00:00Z',
+            'parent_uid' => 'nope',
+            'master'     => ['uid' => '01J8Z3K4M5N6P7Q8R9S0T1V2M1', 'version' => 1, 'published_at' => '2026-09-25T07:00:00Z', 'lifecycle' => 'gone'],
+        ]);
+    } catch (ContractViolation $violation) {
+        expect($violation->errors)->toBe([
+            '/parent_uid'       => ['The string should match pattern: ^[0-7][0-9A-HJKMNP-TV-Z]{25}$'],
+            '/master/lifecycle' => ['The data should match one item from enum'],
+        ]);
+
+        return;
+    }
+
+    test()->fail('Expected a ContractViolation.');
+});
 
 it('refuses an unknown entity version', function () {
     Version::of('order');

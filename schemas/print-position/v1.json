@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/print-position/v1",
-    "version": "1.0.0",
+    "x-version": "1.0.0",
     "title": "PrintPosition",
     "description": "A place on a product that can be decorated, with the techniques allowed there.",
     "type": "object",
@@ -25,7 +25,8 @@
         "image_url": {
             "description": "Illustration of the position.",
             "type": ["string", "null"],
-            "format": "uri"
+            "format": "uri",
+            "pattern": "^https?://"
         },
         "model_area": {
             "description": "Reserved for the 3D plugin: id of the area on the model.",

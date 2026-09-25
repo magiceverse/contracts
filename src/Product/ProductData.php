@@ -2,6 +2,7 @@
 
 namespace Magiceverse\Contracts\Product;
 
+use Magiceverse\Contracts\Common\OmitsEmptyMaps;
 use Magiceverse\Contracts\Common\ProvenanceData;
 use Magiceverse\Contracts\PrintPosition\PrintPositionData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
@@ -18,6 +19,18 @@ use Spatie\LaravelData\Optional;
 #[MapName(SnakeCaseMapper::class)]
 class ProductData extends Data
 {
+    use OmitsEmptyMaps;
+
+    protected const MAPS = [
+        'values' => [
+            'common'                  => 1,
+            'locale_specific'         => 2,
+            'channel_specific'        => 2,
+            'channel_locale_specific' => 3,
+        ],
+        'provenance' => 1,
+    ];
+
     /**
      * @param  list<string>|Optional  $categories  category codes
      * @param  list<string>|Optional  $channels  channel codes

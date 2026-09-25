@@ -1,0 +1,2 @@
+pointer: /parent_uid
+reason: a configurable product is never a variant, so parent_uid must be null.

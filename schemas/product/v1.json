@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/product/v1",
-    "version": "1.0.0",
+    "x-version": "1.0.0",
     "title": "Product",
     "description": "A product as the owning PIM publishes it. A non-null deleted_at makes it a tombstone that carries only its identity.",
     "type": "object",
@@ -9,7 +9,12 @@
     "required": ["uid", "sku", "type", "status", "updated_at"],
     "properties": {
         "uid": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid" },
-        "sku": { "type": "string", "minLength": 1 },
+        "sku": {
+            "description": "Human key; must not start with whitespace.",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^\\S"
+        },
         "type": { "enum": ["simple", "configurable"] },
         "parent_uid": {
             "description": "Set on a simple product that is a variant of a configurable one.",
@@ -139,8 +144,8 @@
             },
             "then": {
                 "properties": {
-                    "variants": { "maxItems": 0 },
-                    "super_attributes": { "maxItems": 0 }
+                    "variants": { "type": "array", "maxItems": 0 },
+                    "super_attributes": { "type": "array", "maxItems": 0 }
                 }
             }
         },
@@ -156,9 +161,19 @@
     ],
     "$defs": {
         "attribute-value": {
-            "description": "Scalar, null, or a list of option codes for multiselects.",
-            "type": ["string", "number", "boolean", "null", "array"],
-            "items": { "type": "string" }
+            "description": "Scalar, null, a list of option codes for multiselects, or a price.",
+            "anyOf": [
+                { "type": ["string", "number", "boolean", "null"] },
+                { "type": "array", "items": { "type": "string" } },
+                { "$ref": "#/$defs/price" }
+            ]
+        },
+        "price": {
+            "description": "Price attribute as UnoPim stores it: decimal string per ISO 4217 currency, e.g. {\"EUR\": \"12.00\"}.",
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": { "pattern": "^[A-Z]{3}$" },
+            "additionalProperties": { "type": "string", "pattern": "^-?[0-9]+(\\.[0-9]+)?$" }
         },
         "attribute-values": {
             "type": "object",
@@ -174,7 +189,7 @@
                     "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code",
                     "description": "Image, file or gallery attribute the file belongs to."
                 },
-                "url": { "type": "string", "format": "uri" },
+                "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
                 "filename": { "type": "string", "minLength": 1 },
                 "mime": { "type": ["string", "null"] },
                 "position": {

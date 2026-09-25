@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/cloudevent/v1",
-    "version": "1.0.0",
+    "x-version": "1.0.0",
     "title": "CloudEvent",
     "description": "Webhook envelope: a CloudEvents 1.0 structured-mode event whose data is a Product.",
     "type": "object",
@@ -14,7 +14,7 @@
             "description": "https://<tenant host> of the sending system.",
             "type": "string",
             "format": "uri",
-            "pattern": "^https://[^/]+$"
+            "pattern": "^https://[A-Za-z0-9.-]+(:[0-9]+)?$"
         },
         "id": {
             "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid",
@@ -26,11 +26,21 @@
             "description": "Uid of the product in data."
         },
         "datacontenttype": { "const": "application/json" },
+        "dataschema": {
+            "description": "Schema $id of data, e.g. https://contracts.magiceverse.dev/product/v1.",
+            "type": "string",
+            "format": "uri"
+        },
         "data": { "$ref": "https://contracts.magiceverse.dev/product/v1" },
         "tenant": {
             "description": "Extension attribute: slug of the sending tenant.",
             "type": "string",
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "traceparent": {
+            "description": "Extension attribute (CloudEvents distributed tracing): W3C traceparent of the causing request.",
+            "type": "string",
+            "minLength": 1
         },
         "correlationid": {
             "description": "Extension attribute: ties the event to the request or job that caused it.",
@@ -47,6 +57,7 @@
             "then": {
                 "properties": {
                     "data": {
+                        "type": "object",
                         "required": ["deleted_at"],
                         "properties": { "deleted_at": { "type": "string" } }
                     }
@@ -61,6 +72,7 @@
             "then": {
                 "properties": {
                     "data": {
+                        "type": "object",
                         "properties": { "deleted_at": { "type": "null" } }
                     }
                 }

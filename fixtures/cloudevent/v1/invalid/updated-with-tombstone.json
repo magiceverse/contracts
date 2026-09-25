@@ -1,0 +1,18 @@
+{
+    "specversion": "1.0",
+    "type": "dev.magiceverse.product.updated",
+    "source": "https://spranz.magiceverse.dev",
+    "id": "01J8Z3K4M5N6P7Q8R9S0T1V2E5",
+    "time": "2026-09-25T06:59:58Z",
+    "subject": "01J8Z3K4M5N6P7Q8R9S0T1V2D1",
+    "datacontenttype": "application/json",
+    "data": {
+        "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2D1",
+        "sku": "PEN-OLD-BLUE",
+        "type": "simple",
+        "status": "disabled",
+        "updated_at": "2026-09-25T06:59:58Z",
+        "deleted_at": "2026-09-25T06:59:58Z"
+    },
+    "tenant": "spranz"
+}

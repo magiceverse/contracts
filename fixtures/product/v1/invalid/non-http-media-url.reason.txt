@@ -1,0 +1,2 @@
+pointer: /media/0/url
+reason: media urls must be http(s).

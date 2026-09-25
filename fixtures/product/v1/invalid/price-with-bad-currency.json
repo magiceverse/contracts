@@ -13,9 +13,9 @@
     ],
     "values": {
         "common": {
-            "dimensions": {
-                "w": "10",
-                "h": "20"
+            "price": {
+                "EUR": "12.00",
+                "eur": "12.00"
             }
         }
     },

@@ -143,5 +143,7 @@
         "updated_at": "2026-09-25T07:00:00Z",
         "deleted_at": null
     },
+    "dataschema": "https://contracts.magiceverse.dev/product/v1",
+    "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
     "correlationid": "import-2026-09-25-0700"
 }

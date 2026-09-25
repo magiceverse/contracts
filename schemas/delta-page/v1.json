@@ -1,9 +1,9 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/delta-page/v1",
-    "version": "1.0.0",
+    "x-version": "1.0.0",
     "title": "DeltaPage",
-    "description": "One page of the product delta feed. Products are sorted by (updated_at, uid) and tombstones appear inline.",
+    "description": "One page of the product delta feed. Products are sorted by (updated_at, uid) and tombstones appear inline. The server never sends an empty page with has_more true.",
     "type": "object",
     "additionalProperties": false,
     "required": ["schema", "data", "cursor", "generated_at"],
@@ -41,6 +41,12 @@
             }
         },
         "generated_at": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" }
+    },
+    "if": {
+        "properties": { "cursor": { "type": "object", "properties": { "has_more": { "const": true } } } }
+    },
+    "then": {
+        "properties": { "data": { "type": "array", "minItems": 1 } }
     },
     "$defs": {
         "semver": {

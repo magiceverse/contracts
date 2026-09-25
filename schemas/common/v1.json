@@ -1,14 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://contracts.magiceverse.dev/common/v1",
-    "version": "1.0.0",
+    "x-version": "1.0.0",
     "title": "Common definitions",
     "description": "Building blocks shared by every contract. Not an entity on its own: other schemas reference these $defs.",
     "$defs": {
         "ulid": {
-            "description": "ULID: 26 characters of Crockford base32. Immutable, assigned by the system that owns the record.",
+            "description": "ULID: 26 characters of Crockford base32; the first is 0-7 because a ULID is 128 bits. Immutable, assigned by the system that owns the record.",
             "type": "string",
-            "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
         },
         "code": {
             "description": "Lowercase snake code, as UnoPim uses for attributes, channels, categories and families.",
@@ -30,7 +30,7 @@
             "type": "object",
             "minProperties": 1,
             "propertyNames": { "$ref": "#/$defs/locale" },
-            "additionalProperties": { "type": "string" }
+            "additionalProperties": { "type": "string", "minLength": 1 }
         },
         "provenance": {
             "description": "Where a value came from, for values that were not typed in by the owner.",

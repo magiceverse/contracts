@@ -25,7 +25,7 @@ it('rejects the invalid fixture at the pointer its reason names', function (stri
     try {
         Schema::validate($entity, 1, json_decode(file_get_contents($path), flags: JSON_THROW_ON_ERROR));
     } catch (ContractViolation $violation) {
-        expect($violation->pointers())->toContain($reason[1]);
+        expect($violation->pointers())->toBe([$reason[1]]);
 
         return;
     }
