@@ -1,0 +1,2 @@
+pointer: /master/lifecycle
+reason: lifecycle must be one of new, active, discontinued, withdrawn.

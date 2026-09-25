@@ -1,0 +1,2 @@
+pointer: /max_width_mm
+reason: max_width_mm must be greater than 0 (or null when unknown).

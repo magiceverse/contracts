@@ -1,0 +1,150 @@
+{
+    "specversion": "1.0",
+    "type": "dev.magiceverse.product.updated",
+    "source": "https://spranz.magiceverse.dev/api/v1",
+    "id": "01J8Z3K4M5N6P7Q8R9S0T1V2E1",
+    "time": "2026-09-25T07:00:00Z",
+    "subject": "01J8Z3K4M5N6P7Q8R9S0T1V2A1",
+    "datacontenttype": "application/json",
+    "data": {
+        "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2A1",
+        "sku": "MUG-300-WHITE",
+        "type": "simple",
+        "parent_uid": null,
+        "status": "enabled",
+        "family": "drinkware",
+        "categories": [
+            "mugs",
+            "ceramics"
+        ],
+        "channels": [
+            "default",
+            "webshop"
+        ],
+        "values": {
+            "common": {
+                "sku": "MUG-300-WHITE",
+                "ean": "8712345678901",
+                "weight": 0.35,
+                "dishwasher_safe": true,
+                "materials": [
+                    "ceramic"
+                ],
+                "brand": null
+            },
+            "locale_specific": {
+                "nl_NL": {
+                    "name": "Mok 300 ml wit",
+                    "description": "Klassieke keramische mok."
+                },
+                "en_US": {
+                    "name": "Mug 300 ml white"
+                }
+            },
+            "channel_specific": {
+                "webshop": {
+                    "min_order_qty": 50
+                }
+            },
+            "channel_locale_specific": {
+                "webshop": {
+                    "nl_NL": {
+                        "meta_title": "Bedrukte mok 300 ml"
+                    }
+                }
+            }
+        },
+        "provenance": {
+            "description": {
+                "origin": "ai",
+                "origin_at": "2026-09-24T08:15:00Z",
+                "origin_by": "claude",
+                "locked": false
+            },
+            "ean": {
+                "origin": "supplier",
+                "origin_by": "spranz",
+                "locked": true
+            }
+        },
+        "media": [
+            {
+                "attribute": "image",
+                "url": "https://cdn.example.com/p/mug-300-white.jpg",
+                "filename": "mug-300-white.jpg",
+                "mime": "image/jpeg",
+                "position": 0
+            },
+            {
+                "attribute": "gallery",
+                "url": "https://cdn.example.com/p/mug-300-white-side.jpg",
+                "filename": "mug-300-white-side.jpg",
+                "mime": "image/jpeg",
+                "position": 0
+            },
+            {
+                "attribute": "gallery",
+                "url": "https://cdn.example.com/p/mug-300-white-top.jpg",
+                "filename": "mug-300-white-top.jpg",
+                "mime": null,
+                "position": 1,
+                "provenance": {
+                    "origin": "supplier",
+                    "origin_by": "spranz"
+                }
+            }
+        ],
+        "print_positions": [
+            {
+                "code": "front",
+                "name": {
+                    "nl_NL": "Voorkant",
+                    "en_US": "Front"
+                },
+                "max_width_mm": 60,
+                "max_height_mm": 40,
+                "shape": "rectangle",
+                "techniques": [
+                    "screen_print",
+                    "digital_transfer"
+                ],
+                "image_url": "https://cdn.example.com/positions/front.png",
+                "model_area": null
+            },
+            {
+                "code": "lid",
+                "name": {
+                    "en_US": "Lid"
+                },
+                "max_width_mm": 35.5,
+                "max_height_mm": 35.5,
+                "shape": "circle",
+                "techniques": [
+                    "laser_engraving"
+                ],
+                "image_url": null,
+                "model_area": "area_lid"
+            }
+        ],
+        "techniques": [
+            "screen_print",
+            "digital_transfer",
+            "laser_engraving"
+        ],
+        "master": {
+            "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2M1",
+            "version": 3,
+            "published_at": "2026-09-01T06:00:00Z",
+            "supplier": "spranz",
+            "supplier_sku": "56-0602045",
+            "lifecycle": "active"
+        },
+        "created_at": "2026-08-12T09:30:00Z",
+        "updated_at": "2026-09-25T07:00:00Z",
+        "deleted_at": null
+    },
+    "tenant": "spranz",
+    "dataschema": "https://contracts.magiceverse.dev/product/v1",
+    "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+    "correlationid": "import-2026-09-25-0700"
+}

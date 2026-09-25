@@ -1,0 +1,2 @@
+pointer: /shape
+reason: shape must be one of rectangle, circle, free.

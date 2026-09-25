@@ -1,0 +1,48 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://contracts.magiceverse.dev/common/v1",
+    "x-version": "1.0.0",
+    "title": "Common definitions",
+    "description": "Building blocks shared by every contract. Not an entity on its own: other schemas reference these $defs.",
+    "$defs": {
+        "ulid": {
+            "description": "ULID: 26 characters of Crockford base32; the first is 0-7 because a ULID is 128 bits. Immutable, assigned by the system that owns the record.",
+            "type": "string",
+            "pattern": "^[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+        },
+        "code": {
+            "description": "Lowercase snake code, as UnoPim uses for attributes, channels, categories and families.",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+        },
+        "locale": {
+            "description": "Locale code as UnoPim writes it, e.g. nl_NL or en_US.",
+            "type": "string",
+            "pattern": "^[a-z]{2,3}(_[A-Za-z0-9]{2,4})+$"
+        },
+        "timestamp": {
+            "description": "RFC 3339 timestamp in UTC, e.g. 2026-09-25T07:00:00Z.",
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"
+        },
+        "localized-text": {
+            "description": "Text per locale, keyed by locale code.",
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": { "$ref": "#/$defs/locale" },
+            "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "provenance": {
+            "description": "Where a value came from, for values that were not typed in by the owner.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["origin"],
+            "properties": {
+                "origin": { "enum": ["supplier", "ai", "human"] },
+                "origin_at": { "$ref": "#/$defs/timestamp" },
+                "origin_by": { "type": "string", "minLength": 1 },
+                "locked": { "type": "boolean", "description": "True when the value must not be overwritten by a later import." }
+            }
+        }
+    }
+}

@@ -1,0 +1,2 @@
+pointer: /unit
+reason: unit must be one of color, position, piece, cm2.

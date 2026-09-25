@@ -1,0 +1,2 @@
+pointer: /schema/product
+reason: schema.product must be a MAJOR.MINOR.PATCH version.

@@ -1,0 +1,2 @@
+pointer: /provenance/origin
+reason: origin must be one of supplier, ai, human.

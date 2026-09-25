@@ -1,0 +1,2 @@
+pointer: /code
+reason: code must be lowercase snake (^[a-z0-9_]+$).

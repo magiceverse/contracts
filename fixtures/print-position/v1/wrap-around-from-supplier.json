@@ -1,0 +1,18 @@
+{
+    "code": "wrap_around",
+    "name": {
+        "nl_NL": "Rondom"
+    },
+    "max_width_mm": null,
+    "max_height_mm": 90,
+    "shape": "free",
+    "techniques": [
+        "digital_transfer"
+    ],
+    "provenance": {
+        "origin": "supplier",
+        "origin_at": "2026-09-20T12:00:00Z",
+        "origin_by": "spranz",
+        "locked": false
+    }
+}

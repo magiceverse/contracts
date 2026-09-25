@@ -1,0 +1,14 @@
+{
+    "code": "lid",
+    "name": {
+        "en_US": "Lid"
+    },
+    "max_width_mm": 35.5,
+    "max_height_mm": 35.5,
+    "shape": "circle",
+    "techniques": [
+        "laser_engraving"
+    ],
+    "image_url": null,
+    "model_area": "area_lid"
+}

@@ -1,0 +1,37 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://contracts.magiceverse.dev/print-position/v1",
+    "x-version": "1.0.0",
+    "title": "PrintPosition",
+    "description": "A place on a product that can be decorated, with the techniques allowed there.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["code", "name"],
+    "properties": {
+        "code": {
+            "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code",
+            "description": "Unique within one product."
+        },
+        "name": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/localized-text" },
+        "max_width_mm": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "max_height_mm": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "shape": { "enum": ["rectangle", "circle", "free"], "default": "rectangle" },
+        "techniques": {
+            "description": "Technique codes allowed on this position.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" }
+        },
+        "image_url": {
+            "description": "Illustration of the position.",
+            "type": ["string", "null"],
+            "format": "uri",
+            "pattern": "^https?://"
+        },
+        "model_area": {
+            "description": "Reserved for the 3D plugin: id of the area on the model.",
+            "type": ["string", "null"]
+        },
+        "provenance": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/provenance" }
+    }
+}

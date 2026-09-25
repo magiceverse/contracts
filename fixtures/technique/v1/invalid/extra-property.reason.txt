@@ -1,0 +1,2 @@
+pointer: /
+reason: additionalProperties is false: price is not part of Technique v1 (the ERP prices techniques).

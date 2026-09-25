@@ -1,0 +1,2 @@
+pointer: /
+reason: the tenant extension attribute is required.

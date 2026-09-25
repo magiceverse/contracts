@@ -1,0 +1,10 @@
+{
+    "code": "digital_transfer",
+    "name": {
+        "nl_NL": "Digitale transfer",
+        "en_US": "Digital transfer"
+    },
+    "max_colors": null,
+    "unit": "piece",
+    "lead_days": null
+}

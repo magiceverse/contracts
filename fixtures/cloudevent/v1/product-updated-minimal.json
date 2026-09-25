@@ -1,0 +1,18 @@
+{
+    "specversion": "1.0",
+    "type": "dev.magiceverse.product.updated",
+    "source": "https://pim.example.com:8443",
+    "id": "01J8Z3K4M5N6P7Q8R9S0T1V2E2",
+    "time": "2026-09-25T07:00:01.250Z",
+    "subject": "01J8Z3K4M5N6P7Q8R9S0T1V2A2",
+    "datacontenttype": "application/json",
+    "data": {
+        "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2A2",
+        "sku": "DRAFT-001",
+        "type": "simple",
+        "status": "disabled",
+        "channels": [],
+        "updated_at": "2026-09-25T07:00:01.250Z"
+    },
+    "tenant": "spranz"
+}

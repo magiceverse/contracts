@@ -1,0 +1,2 @@
+pointer: /data/1/uid
+reason: every item in data must be a valid Product v1; this one has a malformed uid.

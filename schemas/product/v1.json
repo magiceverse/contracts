@@ -1,0 +1,217 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://contracts.magiceverse.dev/product/v1",
+    "x-version": "1.0.0",
+    "title": "Product",
+    "description": "A product as the owning PIM publishes it. A non-null deleted_at makes it a tombstone that carries only its identity.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["uid", "sku", "type", "status", "updated_at"],
+    "properties": {
+        "uid": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid" },
+        "sku": {
+            "description": "Human key; must not start with whitespace.",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^\\S"
+        },
+        "type": { "enum": ["simple", "configurable"] },
+        "parent_uid": {
+            "description": "Set on a simple product that is a variant of a configurable one.",
+            "anyOf": [
+                { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid" },
+                { "type": "null" }
+            ]
+        },
+        "status": { "enum": ["enabled", "disabled"] },
+        "family": {
+            "description": "Attribute family code.",
+            "anyOf": [
+                { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+                { "type": "null" }
+            ]
+        },
+        "categories": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" }
+        },
+        "channels": {
+            "description": "Channels the product is visible in; empty means not published anywhere.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" }
+        },
+        "values": {
+            "description": "Attribute values in UnoPim's own layout. Image, file and gallery attributes live in media instead.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "common": { "$ref": "#/$defs/attribute-values" },
+                "locale_specific": {
+                    "type": "object",
+                    "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/locale" },
+                    "additionalProperties": { "$ref": "#/$defs/attribute-values" }
+                },
+                "channel_specific": {
+                    "type": "object",
+                    "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+                    "additionalProperties": { "$ref": "#/$defs/attribute-values" }
+                },
+                "channel_locale_specific": {
+                    "type": "object",
+                    "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+                    "additionalProperties": {
+                        "type": "object",
+                        "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/locale" },
+                        "additionalProperties": { "$ref": "#/$defs/attribute-values" }
+                    }
+                }
+            }
+        },
+        "provenance": {
+            "description": "Provenance per attribute code, for values that came from a supplier feed, AI or a named person.",
+            "type": "object",
+            "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+            "additionalProperties": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/provenance" }
+        },
+        "media": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/media" }
+        },
+        "variants": {
+            "description": "Uids of the variants; configurable products only.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid" }
+        },
+        "super_attributes": {
+            "description": "Attribute codes the variants differ on; configurable products only.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" }
+        },
+        "print_positions": {
+            "type": "array",
+            "items": { "$ref": "https://contracts.magiceverse.dev/print-position/v1" }
+        },
+        "techniques": {
+            "description": "Technique codes allowed on the product. May differ from the union of the positions' techniques.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" }
+        },
+        "master": {
+            "description": "Link to the master product this one was derived from; null when it has none.",
+            "anyOf": [
+                { "$ref": "#/$defs/master" },
+                { "type": "null" }
+            ]
+        },
+        "created_at": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" },
+        "updated_at": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" },
+        "deleted_at": {
+            "description": "Non-null marks a tombstone.",
+            "anyOf": [
+                { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" },
+                { "type": "null" }
+            ]
+        }
+    },
+    "allOf": [
+        {
+            "description": "A tombstone carries only its identity, so consumers cannot mistake it for a live product.",
+            "if": {
+                "required": ["deleted_at"],
+                "properties": { "deleted_at": { "type": "string" } }
+            },
+            "then": {
+                "properties": {
+                    "uid": true,
+                    "sku": true,
+                    "type": true,
+                    "status": true,
+                    "updated_at": true,
+                    "deleted_at": true
+                },
+                "additionalProperties": false
+            }
+        },
+        {
+            "description": "Only configurable products have variants and super attributes.",
+            "if": {
+                "properties": { "type": { "const": "simple" } }
+            },
+            "then": {
+                "properties": {
+                    "variants": { "type": "array", "maxItems": 0 },
+                    "super_attributes": { "type": "array", "maxItems": 0 }
+                }
+            }
+        },
+        {
+            "description": "A configurable product is never itself a variant.",
+            "if": {
+                "properties": { "type": { "const": "configurable" } }
+            },
+            "then": {
+                "properties": { "parent_uid": { "type": "null" } }
+            }
+        }
+    ],
+    "$defs": {
+        "attribute-value": {
+            "description": "Scalar, null, a list of option codes for multiselects, or a price.",
+            "anyOf": [
+                { "type": ["string", "number", "boolean", "null"] },
+                { "type": "array", "items": { "type": "string" } },
+                { "$ref": "#/$defs/price" }
+            ]
+        },
+        "price": {
+            "description": "Price attribute as UnoPim stores it: decimal string per ISO 4217 currency, e.g. {\"EUR\": \"12.00\"}.",
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": { "pattern": "^[A-Z]{3}$" },
+            "additionalProperties": { "type": "string", "pattern": "^-?[0-9]+(\\.[0-9]+)?$" }
+        },
+        "attribute-values": {
+            "type": "object",
+            "propertyNames": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code" },
+            "additionalProperties": { "$ref": "#/$defs/attribute-value" }
+        },
+        "media": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["attribute", "url", "filename", "position"],
+            "properties": {
+                "attribute": {
+                    "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/code",
+                    "description": "Image, file or gallery attribute the file belongs to."
+                },
+                "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+                "filename": { "type": "string", "minLength": 1 },
+                "mime": { "type": ["string", "null"] },
+                "position": {
+                    "description": "Order within the attribute, starting at 0.",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "provenance": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/provenance" }
+            }
+        },
+        "master": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["uid", "version", "published_at", "lifecycle"],
+            "properties": {
+                "uid": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/ulid" },
+                "version": { "type": "integer", "minimum": 1 },
+                "published_at": { "$ref": "https://contracts.magiceverse.dev/common/v1#/$defs/timestamp" },
+                "supplier": { "type": ["string", "null"] },
+                "supplier_sku": { "type": ["string", "null"] },
+                "lifecycle": { "enum": ["new", "active", "discontinued", "withdrawn"] }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "name": "magiceverse/contracts",
+    "description": "Versioned data contracts shared by Magiceverse systems: JSON Schemas, PHP DTOs and cross-system fixtures for products, print positions, techniques, the delta feed and webhook events.",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.4",
+        "opis/json-schema": "^2.4",
+        "spatie/laravel-data": "^4.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.29",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magiceverse\\Contracts\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magiceverse\\Contracts\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

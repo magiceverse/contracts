@@ -1,0 +1,11 @@
+{
+    "code": "screen_print",
+    "name": {},
+    "max_colors": 4,
+    "unit": "color",
+    "lead_days": 5,
+    "description": {
+        "nl_NL": "Per kleur een zeef; scherp en voordelig vanaf 50 stuks.",
+        "en_US": "One screen per colour; sharp and economical from 50 pieces."
+    }
+}

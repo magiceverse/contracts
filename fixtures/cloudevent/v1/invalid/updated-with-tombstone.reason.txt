@@ -1,0 +1,2 @@
+pointer: /data/deleted_at
+reason: a product.updated event carries a live product; tombstones go out as product.deleted.

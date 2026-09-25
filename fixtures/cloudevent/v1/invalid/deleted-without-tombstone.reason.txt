@@ -1,0 +1,2 @@
+pointer: /data
+reason: a product.deleted event must carry a tombstone (deleted_at set).

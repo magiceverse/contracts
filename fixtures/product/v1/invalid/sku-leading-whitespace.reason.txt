@@ -1,0 +1,2 @@
+pointer: /sku
+reason: sku must not start with whitespace.

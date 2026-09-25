@@ -1,0 +1,2 @@
+pointer: /specversion
+reason: specversion must be 1.0.

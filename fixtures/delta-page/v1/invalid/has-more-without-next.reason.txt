@@ -1,0 +1,2 @@
+pointer: /cursor/next
+reason: when has_more is true, next must be a cursor string.

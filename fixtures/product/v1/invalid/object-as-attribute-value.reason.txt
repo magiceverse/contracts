@@ -1,0 +1,2 @@
+pointer: /values/common/dimensions
+reason: an attribute value is a string, number, boolean, null, list of strings or a price; this object is not a price (keys are not ISO 4217 currency codes).

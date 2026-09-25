@@ -1,0 +1,2 @@
+pointer: /uid
+reason: uid must be an uppercase Crockford base32 ULID (26 characters, no I, L, O, U).

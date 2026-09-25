@@ -1,0 +1,2 @@
+pointer: /print_positions/0/name/nl_NL
+reason: localized text values must not be empty strings.

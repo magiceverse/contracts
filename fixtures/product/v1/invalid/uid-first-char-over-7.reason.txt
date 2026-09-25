@@ -1,0 +1,2 @@
+pointer: /uid
+reason: a ULID is 128 bits, so its first character is 0-7.

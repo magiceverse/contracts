@@ -1,0 +1,22 @@
+{
+    "uid": "01J8Z3K4M5N6P7Q8R9S0T1V2V1",
+    "sku": " TEE-ORGANIC-RED-M",
+    "type": "simple",
+    "parent_uid": "01J8Z3K4M5N6P7Q8R9S0T1V2C1",
+    "status": "enabled",
+    "family": "apparel",
+    "categories": [
+        "t_shirts"
+    ],
+    "channels": [
+        "default"
+    ],
+    "values": {
+        "common": {
+            "sku": "TEE-ORGANIC-RED-M",
+            "color": "red",
+            "size": "m"
+        }
+    },
+    "updated_at": "2026-09-24T16:45:12Z"
+}

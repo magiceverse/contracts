@@ -1,0 +1,2 @@
+pointer: /
+reason: a tombstone (deleted_at set) may only carry uid, sku, type, status, updated_at and deleted_at.

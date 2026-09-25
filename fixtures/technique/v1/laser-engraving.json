@@ -1,0 +1,9 @@
+{
+    "code": "laser_engraving",
+    "name": {
+        "en_US": "Laser engraving"
+    },
+    "max_colors": 1,
+    "unit": "cm2",
+    "lead_days": 3
+}

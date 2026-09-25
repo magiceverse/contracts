@@ -1,0 +1,2 @@
+pointer: /media/0
+reason: media items require attribute, url, filename and position.

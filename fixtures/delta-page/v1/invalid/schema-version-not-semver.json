@@ -1,0 +1,11 @@
+{
+    "schema": {
+        "product": "v1"
+    },
+    "data": [],
+    "cursor": {
+        "next": null,
+        "has_more": false
+    },
+    "generated_at": "2026-09-25T07:00:05Z"
+}
