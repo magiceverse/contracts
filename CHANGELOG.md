@@ -4,7 +4,7 @@ All notable changes to this package are documented here. The package follows
 [Semantic Versioning](https://semver.org/); each schema also carries its own
 version (see `Version`).
 
-## [0.1.1] - Unreleased
+## [0.1.1] - 2026-09-25
 
 ### Added
 - Product 1.1.0: attribute values may be a UnoPim measurement,
@@ -15,7 +15,7 @@ version (see `Version`).
   images of locale- or channel-specific attributes keep their scope. `MediaData`
   has both properties.
 
-## [0.1.0] - Unreleased
+## [0.1.0] - 2026-09-25
 
 ### Added
 - JSON Schemas (draft 2020-12) for Technique, PrintPosition, Product, the delta
